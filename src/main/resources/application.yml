@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: Financial System
+
+  datasource:
+    driver-class-name: ${SPRING_DB_DRIVE}
+    url: ${SPRING_DB_URL}
+    username: ${SPRING_DB_USER}
+    password: ${SPRING_DB_PASSWORD}
+    hikari:
+      schema: ${SPRING_DB_SCHEMA}
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+#vaadin:
+#  launch-browser= true:
+
+server:
+  port: 8888
