@@ -133,6 +133,7 @@ public class DefaultDebtInformationService implements DebtInformationService {
                         .monthsFinanced(debt.getMonthsFinanced())
                         .monthsPaid(debt.getMonthsPaid())
                         .name(debt.getName())
+                        .operationDate(debt.getOperationDate().toString())
                         .build())
                 .toList();
 

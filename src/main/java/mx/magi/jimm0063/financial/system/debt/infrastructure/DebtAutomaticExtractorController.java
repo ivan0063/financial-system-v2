@@ -24,7 +24,7 @@ public class DebtAutomaticExtractorController {
         this.dataBaseLoaderService = dataBaseLoaderService;
     }
 
-    @PostMapping("/extranct/debts")
+    @PostMapping("/extract/debts")
     public ResponseEntity<List<DebtModel>> extractDebtsFromAccountStatement(@RequestParam("file") MultipartFile file,
                                                                       @RequestParam PdfExtractorTypes type) throws Exception {
         if(file.isEmpty()) throw new RuntimeException("There is no valid file in the request");
