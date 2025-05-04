@@ -25,7 +25,7 @@ ENV SPRING_DATASOURCE_PASSWORD=${SPRING_DB_PASSWORD}
 ENV SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA=${SPRING_DB_SCHEMA}
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -X
 
 # Stage 2: Run the application
 FROM openjdk:17-jdk-slim
