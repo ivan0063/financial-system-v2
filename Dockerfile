@@ -30,7 +30,7 @@ ENV SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA=${SPRING_DB_SCHEMA}
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application
-FROM eclipse-temurin:17-jdk-slim
+FROM openjdk:17-jdk-slim
 
 # Set the working directory
 WORKDIR /app
@@ -38,7 +38,7 @@ WORKDIR /app
 # Copy the JAR from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port (updated to match your Dockerfile)
+# Expose the port
 EXPOSE 8888
 
 # Command to run the application
