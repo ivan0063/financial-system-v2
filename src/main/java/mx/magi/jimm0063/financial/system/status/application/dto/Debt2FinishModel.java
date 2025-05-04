@@ -12,6 +12,7 @@ public class Debt2FinishModel implements Serializable {
     private String name;
     private String currentInstallment;
     private Double monthAmount;
+    private String financialInstrument;
 
     public void creteCurrentInstallment(Integer monthsFinanced, Integer monthsPaid) {
         this.currentInstallment = String.format("%d de %d", monthsPaid, monthsFinanced);

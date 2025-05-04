@@ -10,8 +10,8 @@ import mx.magi.jimm0063.financial.system.status.domain.CardDebtStatus;
 import mx.magi.jimm0063.financial.system.status.domain.GlobalDebtStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static mx.magi.jimm0063.financial.system.debt.domain.enums.PdfExtractorTypes.MANUAL;
@@ -83,7 +83,7 @@ public class DefaultDebtInformationService implements DebtInformationService {
     public CardDebtStatus debtEntityStatus(String entityId) {
         Optional<Card> cardOptional = cardRepository.findById(entityId);
         Optional<PersonLoan> personLoanOptional = personLoanRepository.findById(entityId);
-        List<Debt> debts = new ArrayList<>();
+        List<Debt> debts;
         CardDebtStatus cardDebtStatus = null;
 
         if (cardOptional.isPresent()) {
@@ -199,6 +199,7 @@ public class DefaultDebtInformationService implements DebtInformationService {
                     Debt2FinishModel debt2FinishModel = Debt2FinishModel.builder()
                             .monthAmount(debt.getMonthAmount())
                             .name(debt.getName())
+                            .financialInstrument(Objects.nonNull(debt.getCard()) ? debt.getCard().getCardCode() : debt.getPersonLoan().getLoanCode())
                             .build();
                     debt2FinishModel.creteCurrentInstallment(debt.getMonthsFinanced(), debt.getMonthsPaid());
                     return debt2FinishModel;
