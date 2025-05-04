@@ -6,8 +6,6 @@ WORKDIR /app
 
 # Copy only pom.xml first to cache dependencies
 COPY pom.xml .
-# Download dependencies (cached unless pom.xml changes)
-RUN mvn dependency:go-offline -B
 
 # Copy source code
 COPY src ./src
