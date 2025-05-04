@@ -20,6 +20,7 @@ public class CardDebtStatus implements Serializable {
     private String cardName;
     private double credit;
     private double totalDebtAmount;
+    private double debtsCount;
     private List<Debt2FinishModel> almostCompletedDebts;
     private List<DebtModel> cardDebts;
 }

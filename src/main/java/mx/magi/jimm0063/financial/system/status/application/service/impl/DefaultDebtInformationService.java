@@ -10,6 +10,7 @@ import mx.magi.jimm0063.financial.system.status.domain.CardDebtStatus;
 import mx.magi.jimm0063.financial.system.status.domain.GlobalDebtStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +83,7 @@ public class DefaultDebtInformationService implements DebtInformationService {
     public CardDebtStatus debtEntityStatus(String entityId) {
         Optional<Card> cardOptional = cardRepository.findById(entityId);
         Optional<PersonLoan> personLoanOptional = personLoanRepository.findById(entityId);
-        List<Debt> debts;
+        List<Debt> debts = new ArrayList<>();
         CardDebtStatus cardDebtStatus = null;
 
         if (cardOptional.isPresent()) {
@@ -113,6 +114,7 @@ public class DefaultDebtInformationService implements DebtInformationService {
 
     public CardDebtStatus getCardDebtStatus(Card card, List<Debt> debts) {
         List<Debt2FinishModel> almostCompletedDebts = getAlmostCompletedDebts(debts);
+        Integer debtsCount = debts.size();
 
         double monthAmountPayemnt = debts.stream()
                 .mapToDouble(Debt::getMonthAmount)
@@ -146,11 +148,13 @@ public class DefaultDebtInformationService implements DebtInformationService {
                 .monthAmountPayment(monthAmountPayemnt)
                 .totalDebtAmount(totalDebtAmount)
                 .cardDebts(cardDebts)
+                .debtsCount(debtsCount)
                 .build();
     }
 
     public CardDebtStatus getPersonalLoanStatus(PersonLoan personLoan, List<Debt> debts) {
         List<Debt2FinishModel> almostCompletedDebts = getAlmostCompletedDebts(debts);
+        Integer debtsCount = debts.size();
 
         double monthAmountPayment = debts.stream()
                 .mapToDouble(Debt::getMonthAmount)
@@ -180,6 +184,7 @@ public class DefaultDebtInformationService implements DebtInformationService {
                 .availableCredit(availableCredit)
                 .cardName(personLoan.getLoanCode())
                 .credit(0.0)
+                .debtsCount(debtsCount)
                 .monthAmountPayment(monthAmountPayment)
                 .totalDebtAmount(totalDebtAmount)
                 .cardDebts(cardDebts)

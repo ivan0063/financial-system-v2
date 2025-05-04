@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/debt/information")
 public class DebtInformationController {
-    private DebtInformationService debtInformationService;
+    private final DebtInformationService debtInformationService;
 
     public DebtInformationController(DebtInformationService debtInformationService) {
         this.debtInformationService = debtInformationService;
